@@ -1,0 +1,30 @@
+services:
+  blog_web:
+    container_name: blog_web
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www/html
+    networks:
+      - default
+    depends_on:
+      - blog_php
+  blog_php:
+    container_name: blog_php
+    build: ./docker/php
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/var/www/html
+#      - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-xdebug.ini
+  blog_db:
+    container_name: blog_db
+    image: postgres:13.1
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    ports:
+      - 54333:5432
