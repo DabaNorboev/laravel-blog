@@ -26,7 +26,7 @@
         <x-user-avatar :user="$post->user->name"/>
         <div class="ps-2">
             <div class="text-gray-800 font-medium">
-                <a href="{{ route('profile.show', $post->user) }}">
+                <a href="{{ route('users.show', $post->user) }}">
                     {{ $post->user->name ?? 'Автор' }}
                 </a>
 

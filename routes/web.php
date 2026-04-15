@@ -12,7 +12,7 @@ use App\Http\Controllers\Post\EditController;
 use App\Http\Controllers\Post\UpdateController;
 use App\Http\Controllers\Post\DestroyController;
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,11 +25,7 @@ Route::get('/main', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/profiles', [ProfileController::class, 'index'])->name('profile.index');
-    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('users', UserController::class)->except(['create', 'store']);
 
     Route::post('{type}/{id}/like', [LikeController::class, 'toggle'])->name('like.toggle');
 

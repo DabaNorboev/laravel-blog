@@ -27,7 +27,7 @@
                     </x-links.nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-links.nav-link :href="route('profile.index')" :active="request()->routeIs('profile.index')">
+                    <x-links.nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         Пользователи
                     </x-links.nav-link>
                 </div>
@@ -49,7 +49,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-links.dropdown-link :href="route('profile.edit')">
+                        <x-links.dropdown-link :href="route('users.edit', ['user' => Auth::user()])">
                             {{ 'Профиль' }}
                         </x-links.dropdown-link>
 
@@ -95,7 +95,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-links.responsive-nav-link :href="route('profile.edit')">
+                <x-links.responsive-nav-link :href="route('users.edit', ['user' => Auth::user()])">
                     {{ 'Профиль' }}
                 </x-links.responsive-nav-link>
 

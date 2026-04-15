@@ -7,7 +7,7 @@
                 <x-user-avatar :user="$user->name"/>
                 <!-- Имя -->
                 <div>
-                    <a href="{{ route('profile.show', $user) }}">
+                    <a href="{{ route('users.show', $user) }}">
                         <h2 class="text-lg font-medium text-gray-900">{{ $user->name }}</h2>
                     </a>
                 </div>

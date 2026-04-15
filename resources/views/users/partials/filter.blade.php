@@ -1,4 +1,4 @@
-<form method="GET" action="{{ route('profile.index') }}" id="filter-form" class="pb-8 border-b">
+<form method="GET" action="{{ route('users.index') }}" id="filter-form" class="pb-8 border-b">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <!-- Поиск -->
         <div class="flex-1">
@@ -13,7 +13,7 @@
 
         <!-- Кнопки сброса/применения -->
         <div class="flex gap-3">
-            <x-buttons.secondary-button :value="'Сбросить'" :href="route('profile.index')"/>
+            <x-buttons.secondary-button :value="'Сбросить'" :href="route('users.index')"/>
             <x-buttons.primary-button :value="'Применить'" />
         </div>
     </div>

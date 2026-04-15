@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Profile\IndexRequest;
-use App\Http\Requests\Profile\UpdateRequest;
+use App\Http\Requests\User\IndexRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
     public function index(IndexRequest $request)
     {
@@ -37,7 +37,7 @@ class ProfileController extends Controller
         $users = $userQuery->paginate(20)->withQueryString();
 
 
-        return view('profile.index')->with(['users' => $users]);
+        return view('users.index')->with(['users' => $users]);
     }
 
     public function show(User $user)
@@ -51,20 +51,20 @@ class ProfileController extends Controller
             ->withCount(['likedPosts', 'posts', 'comments'])
             ->firstOrFail();
 
-        return view('profile.show')->with(['user' => $user]);
+        return view('users.show')->with(['user' => $user]);
     }
     /**
-     * Display the user's profile form.
+     * Display the user's users form.
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('users.edit', [
             'user' => $request->user(),
         ]);
     }
 
     /**
-     * Update the user's profile information.
+     * Update the user's users information.
      */
     public function update(UpdateRequest $request): RedirectResponse
     {
@@ -76,7 +76,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('users.edit', ['user' => $request->user])->with('status', 'users-updated');
     }
 
     /**

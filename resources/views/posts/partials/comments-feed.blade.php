@@ -29,7 +29,7 @@
                         <!-- Заголовок комментария -->
                         <div class="flex items-center justify-between mb-2">
                             <div>
-                                <a href="{{ route('profile.show', $comment->user) }}">
+                                <a href="{{ route('users.show', $comment->user) }}">
                                     <span class="font-medium text-gray-800">{{ $comment->user->name }}</span>
                                 </a>
                                 <span class="text-gray-500 text-sm ml-3">5 часов назад</span>
