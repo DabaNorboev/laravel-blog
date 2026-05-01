@@ -24,8 +24,9 @@ Route::get('/main', function () {
 })->middleware(['auth', 'verified'])->name('main');
 
 Route::middleware('auth')->group(function () {
-
     Route::resource('users', UserController::class)->except(['create', 'store']);
+
+    Route::resource('categories', CategoryController::class);
 
     Route::post('{type}/{id}/like', [LikeController::class, 'toggle'])->name('like.toggle');
 
@@ -37,18 +38,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/{post}/edit', EditController::class)->name('edit');
         Route::patch('/{post}', UpdateController::class)->name('update');
         Route::delete('/{post}', DestroyController::class)->name('destroy');
-    });
 
-    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
-
-    Route::prefix('/category')->name('categories.')->group(function () {
-        Route::get('/', [CategoryController::class, 'index'])->name('index');
-        Route::get('/create', [CategoryController::class, 'create'])->name('create');
-        Route::post('/', [CategoryController::class, 'store'])->name('store');
-        Route::get('/{category}', [CategoryController::class, 'show'])->name('show');
-        Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('edit');
-        Route::patch('/{category}', [CategoryController::class, 'update'])->name('update');
-        Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+        Route::post('/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
     });
 });
 
