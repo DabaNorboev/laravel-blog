@@ -46,7 +46,7 @@
                             <form action="{{ route('like.toggle', ['type' => 'comment', 'id' => $comment->id]) }}" method="post">
                                 @csrf
                                 <button class="flex items-center gap-1 hover:text-gray-700 transition-colors">
-                                    <span>{{ $comment->likes }}</span>
+                                    <span class="{{ $comment->likes()->where('user_id', auth()->id())->exists() ? "text-red-500" : "" }}">Нравится {{ $comment->likes->count() }}</span>
                                 </button>
                             </form>
                         </div>

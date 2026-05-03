@@ -81,7 +81,7 @@ class User extends Authenticatable
 
     public function likedPosts()
     {
-        return $this->MorphedByMany(Post::class, 'likeable', 'likes');
+        return $this->morphedByMany(Post::class, 'likeable', 'likes');
     }
 
     public function scopeWithStats($query)

@@ -28,9 +28,8 @@
                     <form action="{{ route('like.toggle', ['type' => 'post', 'id' => $post->id]) }}" method="post">
                         @csrf
                         <!-- Кнопка лайка -->
-                        <button class="flex items-center gap-2 text-gray-500 hover:text-red-700 transition-colors group" type="submit">
-                            <span class="font-medium">Нравится</span>
-                            <span class="text-gray-500">{{ $post->likes }}</span>
+                        <button class="flex items-center gap-2" type="submit">
+                            <span class="{{ $post->likes()->where('user_id', auth()->id())->exists() ? "text-red-500" : "" }}">Нравится {{ $post->likes()->count() }}</span>
                         </button>
                     </form>
                 </div>
