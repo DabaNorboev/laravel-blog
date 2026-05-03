@@ -3,7 +3,9 @@
 use App\Http\Controllers\CategoryController;
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Post\IndexController;
 use App\Http\Controllers\Post\ShowController;
 use App\Http\Controllers\Post\CreateController;
@@ -27,6 +29,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class)->except(['create', 'store']);
 
     Route::resource('categories', CategoryController::class);
+
+    Route::prefix('/followers')->name('followers.')->group(function () {
+        Route::get('/', [FollowerController::class, 'index'])->name('index');
+        Route::post('/follow/{following}', [FollowerController::class, 'follow'])->name('follow');
+        Route::delete('/unfollow/{following}', [FollowerController::class, 'unfollow'])->name('unfollow');
+    });
+
+
+
+
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 
     Route::post('{type}/{id}/like', [LikeController::class, 'toggle'])->name('like.toggle');
 

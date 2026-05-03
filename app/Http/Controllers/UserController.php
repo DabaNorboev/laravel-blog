@@ -48,7 +48,7 @@ class UserController extends Controller
                 'likedPosts' => fn ($q) => $q->withCount('comments')->orderBy('created_at', 'desc'),
                 'posts' => fn ($q) => $q->withCount('comments')->orderBy('created_at', 'desc'),
             ])
-            ->withCount(['likedPosts', 'posts', 'comments'])
+            ->withCount(['likedPosts', 'posts', 'comments', 'followers', 'followings'])
             ->firstOrFail();
 
         return view('users.show')->with(['user' => $user]);

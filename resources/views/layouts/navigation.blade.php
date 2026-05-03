@@ -31,6 +31,11 @@
                         Пользователи
                     </x-links.nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-links.nav-link :href="route('followers.index')" :active="request()->routeIs('followers.index')">
+                        Подписки
+                    </x-links.nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -51,6 +56,10 @@
                     <x-slot name="content">
                         <x-links.dropdown-link :href="route('users.edit', ['user' => Auth::user()])">
                             {{ 'Профиль' }}
+                        </x-links.dropdown-link>
+
+                        <x-links.dropdown-link :href="route('notifications.index', ['user' => Auth::user()])">
+                            {{ 'Уведомления' }}
                         </x-links.dropdown-link>
 
                         <!-- Authentication -->
