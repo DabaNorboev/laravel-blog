@@ -18,11 +18,11 @@ class FollowerFactory extends Factory
     public function definition(): array
     {
         return [
-            'follower_id' => User::all()->random()->id,
-            'following_id' => User::all()->random()->id,
-            'created_at' => $this->faker->dateTimeBetween('-3 months', 'now'),
+            'follower_id' => User::inRandomOrder()->value('id') ?? User::factory(),
+            'following_id' => User::inRandomOrder()->value('id') ?? User::factory(),
+            'created_at' => fake()->dateTimeBetween('-3 months', 'now'),
             'updated_at' => function (array $attributes) {
-                return $this->faker->dateTimeBetween($attributes['created_at'], 'now');
+                return fake()->dateTimeBetween($attributes['created_at'], 'now');
             }
         ];
     }

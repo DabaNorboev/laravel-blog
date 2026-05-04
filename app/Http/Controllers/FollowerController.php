@@ -13,7 +13,7 @@ class FollowerController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        $followers = $user->followings()->withStats()->get();
+        $followers = $user->followings()->stats()->get();
         return view('followers.index')->with('users', $followers);
     }
 

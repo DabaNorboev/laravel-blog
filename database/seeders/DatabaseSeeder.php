@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             PostSeeder::class,
             CommentSeeder::class,
+            FollowerSeeder::class,
+            LikeSeeder::class,
         ]);
     }
 }
