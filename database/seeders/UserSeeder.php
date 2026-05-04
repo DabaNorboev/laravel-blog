@@ -19,14 +19,14 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'daba@mail.ru',
             'email_verified_at' => now(),
-            'password' => Hash::make('yfhenj456'),
+            'password' => Hash::make('dabadaba'),
             'remember_token' => Str::random(10),
         ]);
         User::create([
-            'name' => 'dabanya',
-            'email' => 'dabanya@mail.ru',
+            'name' => 'daba',
+            'email' => 'daba@ya.ru',
             'email_verified_at' => now(),
-            'password' => Hash::make('yfhenj456'),
+            'password' => Hash::make('dabadaba'),
             'remember_token' => Str::random(10),
         ]);
 

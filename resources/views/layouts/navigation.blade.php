@@ -58,7 +58,7 @@
                             {{ 'Профиль' }}
                         </x-links.dropdown-link>
 
-                        <x-links.dropdown-link :href="route('notifications.index', ['user' => Auth::user()])">
+                        <x-links.dropdown-link :href="route('notifications.index')">
                             {{ 'Уведомления' }}
                         </x-links.dropdown-link>
 

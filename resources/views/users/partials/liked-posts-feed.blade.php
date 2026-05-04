@@ -39,24 +39,7 @@
                         </div>
                     @endforeach
                 </div>
-
-                @if($user->posts_likes_count > 10)
-                    <div class="mt-4 text-center">
-                        <a href="{{ route('user.liked-posts', $user) }}"
-                           class="inline-block px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                            Показать все лайки на статьи
-                        </a>
-                    </div>
-                @endif
             </div>
-            @if($user->liked_comments_count > 10)
-                <div class="mt-4 text-center">
-                    <a href="{{ route('user.liked-comments', $user) }}"
-                       class="inline-block px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                        Показать все лайки на комментарии
-                    </a>
-                </div>
-            @endif
     </div>
     @endif
 

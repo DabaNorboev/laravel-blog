@@ -16,6 +16,10 @@ class Comment extends Model
 
     protected static function booted()
     {
+        static::created(function ($comment) {
+
+        });
+
         static::addGlobalScope('latest', function (Builder $builder) {
             $builder->latest();
         });
