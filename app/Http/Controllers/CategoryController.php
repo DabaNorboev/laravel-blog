@@ -18,8 +18,13 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::query()->with('posts',
-            fn ($q) => $q->orderBy('likes', 'desc')->limit(3))->get();
+        $categories = Category::query()->with([
+            'posts' => fn ($q) => $q
+                ->withCount('likes')
+                ->orderByLikes()
+                ->limit(3)
+        ])->get();
+
 
         return view('categories.index')->with('categories', $categories);
     }

@@ -41,4 +41,12 @@ class Post extends Model
         return $this->morphMany(Like::class, 'likeable');
     }
 
+    public function scopeOrderByLikes($query, $direction = 'desc')
+    {
+        $query->orderByRaw(
+            '(select count(*) from likes where likes.likeable_id = posts.id and likes.likeable_type = ?) ' . $direction,
+            [$this->getMorphClass()]
+        );
+    }
+
 }
