@@ -12,8 +12,8 @@
                         <div class="flex items-center gap-3 text-gray-500 text-sm mb-2">
                             <span>{{ $post->created_at->format('d.m.Y') }}</span>
                             <span>👁 {{ $post->views }}</span>
-                            <span>👍 {{ $post->likes }}</span>
-                            <span>💬 {{ $post->comments_count }}</span>
+                            <span>👍 {{ $post->likes()->count() }}</span>
+                            <span>💬 {{ $post->comments()->count()}}</span>
                         </div>
                         @if($post->excerpt)
                             <p class="text-gray-600 text-sm line-clamp-2">{{ $post->excerpt }}</p>

@@ -20,8 +20,8 @@
                     <div class="flex items-center justify-between text-sm text-gray-500">
                         <div class="flex items-center gap-3">
                             <span>{{ $comment->created_at->format('d.m.Y H:i') }}</span>
-                            @if($comment->likes > 0)
-                                <span>👍 {{ $comment->likes }}</span>
+                            @if($comment->likes()->count() > 0)
+                                <span>👍 {{ $comment->likes()->count() }}</span>
                             @endif
                         </div>
 

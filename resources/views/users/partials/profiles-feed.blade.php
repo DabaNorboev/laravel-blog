@@ -21,12 +21,12 @@
                 </div>
 
                 <div class="text-center">
-                    <div class="text-2xl font-semibold text-gray-900">{{ number_format($user->posts_views_sum ?? 0) }}</div>
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_sum_views ?? 0 }}</div>
                     <div class="text-sm text-gray-500">просмотров</div>
                 </div>
 
                 <div class="text-center">
-                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_likes_sum ?? 0 }}</div>
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_likes_count ?? 0 }}</div>
                     <div class="text-sm text-gray-500">лайков</div>
                 </div>
 

@@ -12,12 +12,12 @@
                 </div>
 
                 <div class="text-center">
-                    <div class="text-2xl font-semibold text-gray-900">{{ number_format($user->posts_views_sum ?? 0) }}</div>
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_sum_views ?? 0 }}</div>
                     <div class="text-sm text-gray-500">просмотров</div>
                 </div>
 
                 <div class="text-center">
-                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_likes_sum ?? 0 }}</div>
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_likes_count ?? 0 }}</div>
                     <div class="text-sm text-gray-500">лайков</div>
                 </div>
 
@@ -75,7 +75,7 @@
                 <button id="likes-tab"
                         class="tab-button py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300 transition-colors duration-200"
                         data-target="likes-content">
-                    Лайки ({{ $user->liked_posts_count ?? 0}})
+                    Лайки ({{ $user->likes_count ?? 0}})
                 </button>
             </nav>
         </div>
