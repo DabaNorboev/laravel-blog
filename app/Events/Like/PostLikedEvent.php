@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events\Comment;
+namespace App\Events\Like;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -10,16 +10,17 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class CreatedEvent
+class PostLikedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public $like;
+    public function __construct($like)
     {
-        //
+        $this->like = $like;
     }
 
     /**

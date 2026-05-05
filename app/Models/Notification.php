@@ -6,11 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-    protected $fillable = [
-        'user_id', 'from_user_id', 'type', 'data', 'read'
-    ];
+    protected $guarded = false;
     protected $casts = [
         'data' => 'array',
         'read' => 'boolean',
     ];
+
+    public function notifiable()
+    {
+        return $this->morphTo();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'from_user_id');
+    }
 }

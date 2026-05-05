@@ -22,18 +22,6 @@ class LikeFactory extends Factory
      */
     public function definition(): array
     {
-        $type = fake()->randomElement(array_keys(Relation::morphMap()));
-
-        $modelClass = Relation::getMorphedModel($type);
-
-        return [
-            'user_id' => User::factory(),
-            'likeable_type' => $type,
-            'likeable_id' => $modelClass::factory(),
-            'created_at' => fake()->dateTimeBetween('-3 months', 'now'),
-            'updated_at' => function (array $attributes) {
-                return fake()->dateTimeBetween($attributes['created_at'], 'now');
-            },
-        ];
+        return [];
     }
 }

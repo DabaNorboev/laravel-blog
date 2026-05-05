@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Comment\CommentPostedEvent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,7 @@ class Comment extends Model
     protected static function booted()
     {
         static::created(function ($comment) {
-
+            event(new CommentPostedEvent($comment));
         });
 
         static::addGlobalScope('latest', function (Builder $builder) {
@@ -38,5 +39,10 @@ class Comment extends Model
     public function likes()
     {
         return $this->morphMany(Like::class, 'likeable');
+    }
+
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, 'notifiable');
     }
 }

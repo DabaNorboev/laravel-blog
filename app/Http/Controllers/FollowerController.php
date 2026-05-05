@@ -21,7 +21,10 @@ class FollowerController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        $user->followings()->attach($following);
+        Follower::create([
+            'follower_id' => $user->id,
+            'following_id' => $following
+        ]);
 
         return redirect()->back();
     }
@@ -30,7 +33,10 @@ class FollowerController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        $user->followings()->detach($following);
+
+        $follow = Follower::where(['follower_id' => $user->id, 'following_id' => $following],[]);
+
+        $follow->delete();
 
         return redirect()->back();
     }

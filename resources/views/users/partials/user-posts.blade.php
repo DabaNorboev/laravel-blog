@@ -32,13 +32,4 @@
             </div>
         @endforelse
     </div>
-
-    @if($user->posts_count > 10)
-        <div class="mt-6 text-center">
-            <a href="{{ route('user.posts', $user) }}"
-               class="inline-block px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                Показать все статьи
-            </a>
-        </div>
-    @endif
 </div>

@@ -90,6 +90,11 @@ class User extends Authenticatable
         return $this->followings()->where('following_id', $following->id)->exists();
     }
 
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, 'notifiable', 'notifiable_type', 'notifiable_id');
+    }
+
     public function scopeSearch($query, $search)
     {
         return $query->where('name', 'like', "%{$search}%");
