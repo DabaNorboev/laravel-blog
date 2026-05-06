@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Models;
+namespace Database\Seeders;
 
 use App\Events\Like\CommentLikedEvent;
 use App\Events\Like\PostLikedEvent;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Like;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
-class Like extends Model
+class NotificationSeeder extends Seeder
 {
-    use HasFactory;
-    protected $guarded = false;
-
-    protected static function booted(): void
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
-        static::created(function (Like $like) {
+        Like::all()->each(function (Like $like) {
             $eventMap = [
                 'post'    => PostLikedEvent::class,
                 'comment' => CommentLikedEvent::class,
@@ -26,10 +27,5 @@ class Like extends Model
                 event(new $eventClass($like));
             }
         });
-    }
-
-    public function likeable()
-    {
-        return $this->morphTo();
     }
 }
