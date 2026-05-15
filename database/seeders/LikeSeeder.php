@@ -27,7 +27,7 @@ class LikeSeeder extends Seeder
             (new Comment())->getMorphClass() => $comments,
         ];
 
-        $this->seedLikes($users, $likeables, targetCount: 2000);
+        $this->seedLikes($users, $likeables, targetCount: 200);
     }
 
     private function seedLikes(Collection $users, array $likeables, int $targetCount): void

@@ -14,7 +14,7 @@ class CommentSeeder extends Seeder
      */
     public function run(): void
     {
-        $comments = Comment::factory(777)->create();
+        $comments = Comment::factory(100)->create();
         $comments->each(function ($comment) {
             event(new CommentPostedEvent($comment));
         });

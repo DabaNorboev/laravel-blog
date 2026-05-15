@@ -10,7 +10,13 @@
                             </a>
                         </h3>
                         <div class="flex items-center gap-3 text-gray-500 text-sm mb-2">
-                            <span>{{ $post->created_at->format('d.m.Y') }}</span>
+                            <span>
+                                @if($post->created_at->diffInHours() < 24)
+                                    {{ $post->created_at->diffForHumans() }}
+                                @else
+                                    {{ $post->created_at->translatedFormat('d M H:i') }}
+                                @endif
+                            </span>
                             <span>👁 {{ $post->views }}</span>
                             <span>👍 {{ $post->likes()->count() }}</span>
                             <span>💬 {{ $post->comments()->count()}}</span>

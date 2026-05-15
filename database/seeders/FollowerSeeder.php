@@ -13,7 +13,7 @@ class FollowerSeeder extends Seeder
      */
     public function run(): void
     {
-        $followers = Follower::factory(500)->create();
+        $followers = Follower::factory(200)->create();
         $followers->each(function ($follower) {
            event(new UserFollowedEvent($follower));
         });

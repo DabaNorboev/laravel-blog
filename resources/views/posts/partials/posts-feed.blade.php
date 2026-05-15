@@ -9,7 +9,13 @@
             </div>
             <!-- Дата -->
             <div>
-                <p class="font-light text-gray-800">{{ $post->created_at ? $post->created_at->format('d M, H:i') : ''}}</p>
+                <p class="font-light text-gray-800">
+                    @if($post->created_at->diffInHours() < 24)
+                        {{ $post->created_at->diffForHumans() }}
+                    @else
+                        {{ $post->created_at->translatedFormat('d M H:i') }}
+                    @endif
+                </p>
             </div>
         </div>
 

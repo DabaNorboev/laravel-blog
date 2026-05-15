@@ -17,7 +17,11 @@
 
         <!-- Дата -->
         <div class="text-gray-500 text-sm">
-            {{$post->created_at->format('d M, H:i')}}
+            @if($post->created_at->diffInHours() < 24)
+                {{ $post->created_at->diffForHumans() }}
+            @else
+                {{ $post->created_at->translatedFormat('d M H:i') }}
+            @endif
         </div>
     </div>
 

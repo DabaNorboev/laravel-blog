@@ -32,7 +32,13 @@
                                 <a href="{{ route('users.show', $comment->user) }}">
                                     <span class="font-medium text-gray-800">{{ $comment->user->name }}</span>
                                 </a>
-                                <span class="text-gray-500 text-sm ml-3">5 часов назад</span>
+                                <span class="text-gray-500 text-sm ml-3">
+                                    @if($comment->created_at->diffInHours() < 24)
+                                        {{ $comment->created_at->diffForHumans() }}
+                                    @else
+                                        {{ $comment->created_at->translatedFormat('d M H:i') }}
+                                    @endif
+                                </span>
                             </div>
                         </div>
 

@@ -5,13 +5,12 @@ namespace App\Providers;
 use App\Events\Comment\CommentPostedEvent;
 use App\Events\Like\CommentLikedEvent;
 use App\Events\Like\PostLikedEvent;
-use App\Events\LikedEvent;
 use App\Events\User\UserFollowedEvent;
+use App\Http\Controllers\NotificationController;
 use App\Listeners\Notify\NotifyCommentAuthorAboutLikeListener;
 use App\Listeners\Notify\NotifyNewFollowerListener;
 use App\Listeners\Notify\NotifyPostAuthorAboutCommentListener;
 use App\Listeners\Notify\NotifyPostAuthorAboutLikeListener;
-use App\Models\Follower;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -32,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \Carbon\Carbon::setLocale('ru');
+
         Event::listen(
             CommentPostedEvent::class,
             NotifyPostAuthorAboutCommentListener::class
