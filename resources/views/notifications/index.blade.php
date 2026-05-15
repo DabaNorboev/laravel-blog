@@ -7,7 +7,7 @@
                 </div>
                 @include('notifications.partials.filter')
 
-                @if(empty($notifications))
+                @if($notifications->isEmpty())
                     @include('notifications.partials.empty-feed')
                 @else
                     @include('notifications.partials.feed')

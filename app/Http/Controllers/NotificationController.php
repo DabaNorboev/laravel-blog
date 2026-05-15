@@ -12,11 +12,24 @@ class NotificationController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        $notificationsQuery = Notification::query()->where('user_id', $user->id)
+
+        $data = $request->validated();
+        $filter = $data['filter'] ?? 'all';
+
+        $filterMap = [
+            'read' => true,
+            'unread' => false,
+        ];
+
+        $notifications = Notification::query()
+            ->where('user_id', $user->id)
+            ->when($filter !== 'all', function ($query) use ($filter, $filterMap) {
+                $query->where('read', $filterMap[$filter]);
+            })
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('notifications.index')->with(['notifications' => $notificationsQuery]);
+        return view('notifications.index')->with(['notifications' => $notifications]);
     }
 
     public function markAsRead(Notification $notification)
