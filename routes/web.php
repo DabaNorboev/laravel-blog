@@ -39,7 +39,11 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::prefix('/notifications')->name('notifications.')->group(function () {
+        Route::get('/', [NotificationController::class, 'index'])->name('index');
+        Route::patch('/read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-as-read');
+    });
+
 
     Route::post('{type}/{id}/like', [LikeController::class, 'toggle'])->name('like.toggle');
 

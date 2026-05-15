@@ -18,4 +18,17 @@ class NotificationController extends Controller
 
         return view('notifications.index')->with(['notifications' => $notificationsQuery]);
     }
+
+    public function markAsRead(Notification $notification)
+    {
+        if (!$notification->read && $notification->user_id === auth()->id())
+        {
+            $notification->update([
+                'read' => true,
+                'updated_at' => now(),
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Уведомление отмечено как прочитанное');
+    }
 }
