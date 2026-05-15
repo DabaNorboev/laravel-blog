@@ -19,17 +19,17 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(),
-            'content' => $this->faker->text(random_int(1500, 3500)),
-            'category_id' => Category::all()->random()->id,
-            'image' => $this->faker->imageUrl(),
-            'views' => random_int(1000, 5000),
+            'title' => fake()->sentence(),
+            'content' => fake()->text(random_int(1500, 3500)),
+            'category_id' => Category::inRandomOrder()->value('id') ?? Category::factory(),
+            'image' => fake()->imageUrl(),
+            'views' => fake()->numberBetween(1000, 5000),
             'is_published' => true,
-            'created_at' => $this->faker->dateTimeBetween('-3 months', 'now'),
+            'created_at' => fake()->dateTimeBetween('-3 months', 'now'),
             'updated_at' => function (array $attributes) {
-                return $this->faker->dateTimeBetween($attributes['created_at'], 'now');
+                return fake()->dateTimeBetween($attributes['created_at'], 'now');
             },
-            'user_id' => User::all()->random()->id,
+            'user_id' => User::inRandomOrder()->value('id') ?? Category::factory(),
         ];
     }
 }

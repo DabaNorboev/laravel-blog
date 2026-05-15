@@ -31,9 +31,9 @@ class UserFactory extends Factory
             },
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'created_at' => $this->faker->dateTimeBetween('-3 months', 'now'),
+            'created_at' => fake()->dateTimeBetween('-3 months', 'now'),
             'updated_at' => function (array $attributes) {
-                return $this->faker->dateTimeBetween($attributes['created_at'], 'now');
+                return fake()->dateTimeBetween($attributes['created_at'], 'now');
             }
         ];
     }

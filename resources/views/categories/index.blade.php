@@ -53,7 +53,13 @@
                                     <h3 class="text-gray-800 line-clamp-2 text-sm mb-1 leading-snug">
                                         {{ $post->title }}
                                     </h3>
-                                    <p class="text-gray-500 text-xs">{{ $post->created_at->format('d M, H:i') }}</p>
+                                    <p class="text-gray-500 text-xs">
+                                        @if($post->created_at->diffInHours() < 24)
+                                            {{ $post->created_at->diffForHumans() }}
+                                        @else
+                                            {{ $post->created_at->translatedFormat('d M H:i') }}
+                                        @endif
+                                    </p>
                                 </a>
                             </div>
                         @endforeach

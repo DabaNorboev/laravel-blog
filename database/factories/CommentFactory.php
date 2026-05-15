@@ -19,12 +19,12 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            'message' => $this->faker->realText(),
-            'user_id' => User::all()->random()->id,
-            'post_id' => Post::all()->random()->id,
-            'created_at' => $this->faker->dateTimeBetween('-3 months', 'now'),
+            'message' => fake()->realText(),
+            'user_id' => User::inRandomOrder()->value('id') ?? User::factory(),
+            'post_id' => Post::inRandomOrder()->value('id') ?? Post::factory(),
+            'created_at' => fake()->dateTimeBetween('-3 months', 'now'),
             'updated_at' => function (array $attributes) {
-                return $this->faker->dateTimeBetween($attributes['created_at'], 'now');
+                return fake()->dateTimeBetween($attributes['created_at'], 'now');
             }
         ];
     }

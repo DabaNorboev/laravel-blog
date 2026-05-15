@@ -17,10 +17,10 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->word(),
-            'created_at' => $this->faker->dateTimeBetween('-3 months', 'now'),
+            'title' => fake()->word(),
+            'created_at' => fake()->dateTimeBetween('-3 months', 'now'),
             'updated_at' => function (array $attributes) {
-                return $this->faker->dateTimeBetween($attributes['created_at'], 'now');
+                return fake()->dateTimeBetween($attributes['created_at'], 'now');
             }
         ];
     }

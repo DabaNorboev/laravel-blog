@@ -14,7 +14,35 @@
             </div>
 
             <!-- Статистика -->
-            <x-user-stats :user="$user"/>
+            <div class="flex gap-6 mt-4">
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_count ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">статей</div>
+                </div>
+
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_sum_views ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">просмотров</div>
+                </div>
+
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_likes_count ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">лайков</div>
+                </div>
+
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_comments_count ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">комментариев</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->followings_count ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">подписок</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->followers_count ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">подписчиков</div>
+                </div>
+            </div>
         </div>
     </div>
 @endforeach

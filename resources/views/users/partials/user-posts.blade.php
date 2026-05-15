@@ -10,10 +10,16 @@
                             </a>
                         </h3>
                         <div class="flex items-center gap-3 text-gray-500 text-sm mb-2">
-                            <span>{{ $post->created_at->format('d.m.Y') }}</span>
+                            <span>
+                                @if($post->created_at->diffInHours() < 24)
+                                    {{ $post->created_at->diffForHumans() }}
+                                @else
+                                    {{ $post->created_at->translatedFormat('d M H:i') }}
+                                @endif
+                            </span>
                             <span>👁 {{ $post->views }}</span>
-                            <span>👍 {{ $post->likes }}</span>
-                            <span>💬 {{ $post->comments_count }}</span>
+                            <span>👍 {{ $post->likes()->count() }}</span>
+                            <span>💬 {{ $post->comments()->count()}}</span>
                         </div>
                         @if($post->excerpt)
                             <p class="text-gray-600 text-sm line-clamp-2">{{ $post->excerpt }}</p>
@@ -32,13 +38,4 @@
             </div>
         @endforelse
     </div>
-
-    @if($user->posts_count > 10)
-        <div class="mt-6 text-center">
-            <a href="{{ route('user.posts', $user) }}"
-               class="inline-block px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                Показать все статьи
-            </a>
-        </div>
-    @endif
 </div>

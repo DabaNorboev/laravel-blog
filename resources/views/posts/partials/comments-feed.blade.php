@@ -32,7 +32,13 @@
                                 <a href="{{ route('users.show', $comment->user) }}">
                                     <span class="font-medium text-gray-800">{{ $comment->user->name }}</span>
                                 </a>
-                                <span class="text-gray-500 text-sm ml-3">5 часов назад</span>
+                                <span class="text-gray-500 text-sm ml-3">
+                                    @if($comment->created_at->diffInHours() < 24)
+                                        {{ $comment->created_at->diffForHumans() }}
+                                    @else
+                                        {{ $comment->created_at->translatedFormat('d M H:i') }}
+                                    @endif
+                                </span>
                             </div>
                         </div>
 
@@ -46,7 +52,7 @@
                             <form action="{{ route('like.toggle', ['type' => 'comment', 'id' => $comment->id]) }}" method="post">
                                 @csrf
                                 <button class="flex items-center gap-1 hover:text-gray-700 transition-colors">
-                                    <span>{{ $comment->likes }}</span>
+                                    <span class="{{ $comment->likes()->where('user_id', auth()->id())->exists() ? "text-red-500" : "" }}">Нравится {{ $comment->likes->count() }}</span>
                                 </button>
                             </form>
                         </div>

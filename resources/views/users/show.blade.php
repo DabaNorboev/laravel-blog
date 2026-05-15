@@ -5,7 +5,55 @@
             <!-- Левая часть -->
             <h1 class="text-xl font-medium text-gray-900 mb-1 ps-3">{{ $user->name }}</h1>
             <p class="text-gray-500 text-sm mb-4">{{ $user->email }}</p>
-            <x-user-stats :user="$user"/>
+            <div class="flex gap-6 mt-4">
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_count ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">статей</div>
+                </div>
+
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_sum_views ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">просмотров</div>
+                </div>
+
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_likes_count ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">лайков</div>
+                </div>
+
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->posts_comments_count ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">комментариев</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->followings_count ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">подписок</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-semibold text-gray-900">{{ $user->followers_count ?? 0 }}</div>
+                    <div class="text-sm text-gray-500">подписчиков</div>
+                </div>
+            </div>
+            <div>
+                @if(Auth::user()->isFollowed($user))
+                    <form action="{{ route('followers.unfollow', ['following' => $user]) }}" method="POST" class="space-y-8">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-normal text-base text-white">
+                            Отписаться
+                        </button>
+                    </form>
+                @else
+                    <form action="{{ route('followers.follow', ['following' => $user]) }}" method="POST" class="space-y-8">
+                        @csrf
+                        <button type="submit"
+                                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-normal text-base text-white">
+                            Подписаться
+                        </button>
+                    </form>
+                @endif
+            </div>
         </div>
     </div>
 
@@ -27,7 +75,7 @@
                 <button id="likes-tab"
                         class="tab-button py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300 transition-colors duration-200"
                         data-target="likes-content">
-                    Лайки ({{ $user->liked_posts_count ?? 0}})
+                    Лайки ({{ $user->likes_count ?? 0}})
                 </button>
             </nav>
         </div>

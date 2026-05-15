@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Events\Comment\CommentPostedEvent;
 use App\Models\Comment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,6 +14,9 @@ class CommentSeeder extends Seeder
      */
     public function run(): void
     {
-        Comment::factory(777)->create();
+        $comments = Comment::factory(100)->create();
+        $comments->each(function ($comment) {
+            event(new CommentPostedEvent($comment));
+        });
     }
 }

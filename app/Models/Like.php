@@ -2,19 +2,29 @@
 
 namespace App\Models;
 
+use App\Events\Like\CommentLikedEvent;
+use App\Events\Like\PostLikedEvent;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
+    use HasFactory;
     protected $guarded = false;
 
-    protected static function booted()
+    protected static function booted(): void
     {
-        static::created(function ($like) {
-            $like->likeable()->increment('likes');
-        });
-        static::deleted(function ($like) {
-            $like->likeable()->decrement('likes');
+        static::created(function (Like $like) {
+            $eventMap = [
+                'post'    => PostLikedEvent::class,
+                'comment' => CommentLikedEvent::class,
+            ];
+
+            $eventClass = $eventMap[$like->likeable_type] ?? null;
+
+            if ($eventClass) {
+                event(new $eventClass($like));
+            }
         });
     }
 

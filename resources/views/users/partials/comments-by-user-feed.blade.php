@@ -19,9 +19,15 @@
                     <!-- Мета-информация -->
                     <div class="flex items-center justify-between text-sm text-gray-500">
                         <div class="flex items-center gap-3">
-                            <span>{{ $comment->created_at->format('d.m.Y H:i') }}</span>
-                            @if($comment->likes > 0)
-                                <span>👍 {{ $comment->likes }}</span>
+                            <span>
+                                @if($comment->created_at->diffInHours() < 24)
+                                    {{ $comment->created_at->diffForHumans() }}
+                                @else
+                                    {{ $comment->created_at->translatedFormat('d M H:i') }}
+                                @endif
+                            </span>
+                            @if($comment->likes()->count() > 0)
+                                <span>👍 {{ $comment->likes()->count() }}</span>
                             @endif
                         </div>
 
@@ -38,13 +44,4 @@
             </div>
         @endforelse
     </div>
-
-    @if($user->comments_count > 10)
-        <div class="mt-6 text-center">
-            <a href="{{ route('user.comments', $user) }}"
-               class="inline-block px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                Показать все комментарии
-            </a>
-        </div>
-    @endif
 </div>
